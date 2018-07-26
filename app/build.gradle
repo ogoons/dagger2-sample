@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+// for Dagger 2
 apply plugin: 'kotlin-kapt'
 
 
@@ -41,8 +42,11 @@ dependencies {
 //    implementation 'com.google.dagger:dagger-android-support:2.13'
 //    annotationProcessor 'com.google.dagger:dagger-android-processor:2.13'
 
+    // Dagger 2
     implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion" // kapt = kotlin annotation processing tool
+    implementation 'com.android.support:support-v4:27.1.1'
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    // kapt = kotlin annotation processing tool
     compileOnly 'javax.annotation:jsr250-api:1.0'
 
 
