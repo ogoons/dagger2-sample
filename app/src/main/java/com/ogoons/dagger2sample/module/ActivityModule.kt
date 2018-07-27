@@ -15,7 +15,4 @@ class ActivityModule constructor(private val activity: Activity) {
     @Provides
     fun provideActivity(): Activity = activity
 
-//    @Provides
-//    fun provideContext(): Context = activity
-
 }

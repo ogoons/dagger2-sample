@@ -8,15 +8,10 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(MobilityModule::class))
+@Component(
+        modules = arrayOf(MobilityModule::class))
 interface MobilityComponent {
 
-//    fun getContext(): Context
-
     fun getVehicle(): Vehicle
-
-    fun inject(fragment: MainFragment)
-
-    fun inject(activity: MainActivity)
 
 }

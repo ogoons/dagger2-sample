@@ -9,10 +9,12 @@ import javax.inject.Singleton
 @Module
 class MobilityModule {
 
-    @Singleton
     @Provides
     fun provideMotor() = Motor()
 
+    /**
+     * 싱글톤으로 제공하는 객체는 싱글톤 컴포넌트에 modules로 등록해야한다.
+     */
     @Singleton
     @Provides
     fun provideVehicle() = Vehicle(provideMotor())

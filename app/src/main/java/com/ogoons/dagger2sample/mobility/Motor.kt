@@ -3,7 +3,6 @@ package com.ogoons.dagger2sample.mobility
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class Motor @Inject internal constructor() {
     internal var rpm: Int = 0
         private set
