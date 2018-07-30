@@ -5,11 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import com.ogoons.dagger2sample.App
 import com.ogoons.dagger2sample.R
 import com.ogoons.dagger2sample.component.ActivityComponent
+import javax.inject.Inject
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity/*<P : BasePresenter>*/ : AppCompatActivity() {
 
     lateinit var component: ActivityComponent
         protected set
+
+//    @Inject
+//    lateinit var presenter: P
 
     protected abstract fun getInitializedComponent(): ActivityComponent
 
@@ -23,4 +27,5 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     protected fun getApplicationComponent() = App.component
+
 }

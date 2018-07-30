@@ -7,42 +7,53 @@ import com.ogoons.dagger2sample.R
 import com.ogoons.dagger2sample.component.ActivityComponent
 import com.ogoons.dagger2sample.component.DaggerMainActivityComponent
 import com.ogoons.dagger2sample.component.MainActivityComponent
-import com.ogoons.dagger2sample.mobility.Vehicle
+import com.ogoons.dagger2sample.module.MainActivityModule
 import com.ogoons.dagger2sample.view.base.BaseActivity
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity/*<MainPresenter>*/(), MainContract.View {
 
     @Inject
     lateinit var fragment: MainFragment
 
-    @Inject
-    lateinit var vehicle: Vehicle
+    override lateinit var presenter: MainContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<Button>(R.id.btn_mob_injection)
+        val button = findViewById<Button>(R.id.btn_increase_speed)
         button.setOnClickListener {
-            vehicle.increaseSpeed(1)
-            Toast.makeText(this, component.getVehicle().speed.toString(), Toast.LENGTH_LONG).show()
+            // Call
+            presenter.increaseSpeed(10)
         }
 
         supportFragmentManager.beginTransaction().apply {
-            add(R.id.fl_container, fragment, MainFragment::class.java.simpleName)
-            addToBackStack(MainFragment::class.java.simpleName)
+            replace(R.id.fl_container, fragment, MainFragment::class.java.simpleName)
             commit()
         }
     }
 
+    override fun onSpeedChange(speed: Int) {
+        // Callback
+        Toast.makeText(this, component.getVehicle().speed.toString(), Toast.LENGTH_LONG).show()
+    }
+
+    /**
+     * Build component
+     */
     override fun getInitializedComponent(): ActivityComponent {
         return DaggerMainActivityComponent.builder()
+                .mainActivityModule(MainActivityModule(this))
                 .applicationComponent(getApplicationComponent())
                 .build()
     }
 
+    /**
+     * Injection
+     */
     override fun onInject(component: ActivityComponent) {
         (component as MainActivityComponent).inject(this)
     }
+
 }

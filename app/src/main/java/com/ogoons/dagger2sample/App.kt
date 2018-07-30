@@ -1,6 +1,7 @@
 package com.ogoons.dagger2sample
 
 import android.app.Application
+import android.widget.Toast
 import com.ogoons.dagger2sample.component.ApplicationComponent
 import com.ogoons.dagger2sample.component.DaggerApplicationComponent
 import com.ogoons.dagger2sample.mobility.Vehicle
@@ -28,5 +29,6 @@ class App : Application() {
                 }
 
         vehicle.increaseSpeed(100)
+        Toast.makeText(this, "Initialize fathersVehicle speed : ${vehicle.speed} in app object", Toast.LENGTH_LONG).show()
     }
 }
