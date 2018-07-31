@@ -30,7 +30,9 @@ class MainActivity : BaseActivity(), MainContract.View {
         val button = findViewById<Button>(R.id.btn_increase_speed)
         button.setOnClickListener {
             // Call
-            presenter.increaseSpeed(10)
+//            presenter.increaseSpeed(10)
+            vehicle.increaseSpeed(10)
+            Toast.makeText(this, vehicle.speed.toString(), Toast.LENGTH_LONG).show()
         }
 
         supportFragmentManager.beginTransaction().apply {

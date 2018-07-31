@@ -1,7 +1,7 @@
 package com.ogoons.dagger2sample.view.base
 
-interface BaseView<T> {
+interface BaseView<P> {
 
-    var presenter: T
+    var presenter: P
 
 }

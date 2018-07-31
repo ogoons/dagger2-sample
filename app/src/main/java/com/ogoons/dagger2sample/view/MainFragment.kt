@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.ogoons.dagger2sample.R
-import com.ogoons.dagger2sample.component.MainActivityComponent
 import com.ogoons.dagger2sample.mobility.Vehicle
 import com.ogoons.dagger2sample.view.base.BaseFragment
 import javax.inject.Inject
@@ -28,15 +27,16 @@ class MainFragment @Inject constructor() : BaseFragment(), MainContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        getComponent(MainFragmentComponent::class.java).inject(this)
 
-//        getComponent(MainActivityComponent::class.java).inject(this)
 
         view.findViewById<Button>(R.id.btn_decrease).setOnClickListener {
-            presenter.decreaseSpeed(10)
+            vehicle.increaseSpeed(10)
+            Toast.makeText(requireContext(), vehicle.speed.toString(), Toast.LENGTH_LONG).show()
         }
 
         view.findViewById<Button>(R.id.btn_decrease_of_app_instance).setOnClickListener {
-            vehicle.increaseSpeed(500)
+            vehicle.increaseSpeed(10)
             Toast.makeText(requireContext(), vehicle.speed.toString(), Toast.LENGTH_LONG).show()
         }
     }

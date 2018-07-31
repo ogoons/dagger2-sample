@@ -1,19 +1,21 @@
 package com.ogoons.dagger2sample.module
 
-import android.app.Application
 import android.content.Context
-import com.ogoons.dagger2sample.scope.ApplicationContext
+import com.ogoons.dagger2sample.mobility.Motor
+import com.ogoons.dagger2sample.mobility.Vehicle
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-class ApplicationModule constructor(private val application: Application) {
+class ApplicationModule constructor(private val applicationContext: Context) {
 
     @Provides
-    internal fun provideApplication(): Application = application
+    @Singleton
+    internal fun provideApplicationContext(): Context = applicationContext
 
     @Provides
-    @ApplicationContext
-    internal fun provideApplicationContext(): Context = application
+    @Singleton
+    fun provideVehicle() = Vehicle(Motor())
 
 }

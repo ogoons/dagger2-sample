@@ -1,7 +1,7 @@
 package com.ogoons.dagger2sample.scope
 
-import javax.inject.Singleton
+import javax.inject.Scope
 
-@Singleton
+@Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ApplicationContext
+annotation class FragmentScope
