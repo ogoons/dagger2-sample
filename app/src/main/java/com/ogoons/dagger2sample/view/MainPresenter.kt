@@ -4,22 +4,24 @@ import com.ogoons.dagger2sample.mobility.Motor
 import com.ogoons.dagger2sample.mobility.Vehicle
 import javax.inject.Inject
 
-class MainPresenter @Inject internal constructor(view: MainContract.View) : MainContract.Presenter {
+class MainPresenter @Inject internal constructor(val view: MainContract.View) : MainContract.Presenter {
 
     val vehicle: Vehicle by lazy {
         Vehicle(Motor())
     }
 
     init {
-//        view.presenter = this
+        view.presenter = this
     }
 
     override fun increaseSpeed(speed: Int) {
         vehicle.increaseSpeed(speed)
+        view.onSpeedChange(vehicle.speed)
     }
 
     override fun decreaseSpeed(speed: Int) {
         vehicle.decreaseSpeed(speed)
+        view.onSpeedChange(vehicle.speed)
     }
 
     override fun start() {

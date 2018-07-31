@@ -7,16 +7,21 @@ import com.ogoons.dagger2sample.R
 import com.ogoons.dagger2sample.component.ActivityComponent
 import com.ogoons.dagger2sample.component.DaggerMainActivityComponent
 import com.ogoons.dagger2sample.component.MainActivityComponent
+import com.ogoons.dagger2sample.mobility.Vehicle
 import com.ogoons.dagger2sample.module.MainActivityModule
 import com.ogoons.dagger2sample.view.base.BaseActivity
 import javax.inject.Inject
 
-class MainActivity : BaseActivity/*<MainPresenter>*/(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View {
 
     @Inject
     lateinit var fragment: MainFragment
 
+    @Inject
     override lateinit var presenter: MainContract.Presenter
+
+    @Inject
+    lateinit var vehicle: Vehicle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,7 @@ class MainActivity : BaseActivity/*<MainPresenter>*/(), MainContract.View {
 
     override fun onSpeedChange(speed: Int) {
         // Callback
-        Toast.makeText(this, component.getVehicle().speed.toString(), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, speed.toString(), Toast.LENGTH_LONG).show()
     }
 
     /**

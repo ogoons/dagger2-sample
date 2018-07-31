@@ -13,10 +13,13 @@ import com.ogoons.dagger2sample.mobility.Vehicle
 import com.ogoons.dagger2sample.view.base.BaseFragment
 import javax.inject.Inject
 
-class MainFragment @Inject constructor() : BaseFragment() {
+class MainFragment @Inject constructor() : BaseFragment(), MainContract.View {
 
     @Inject
     lateinit var vehicle: Vehicle
+
+    @Inject
+    override lateinit var presenter: MainContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -26,15 +29,20 @@ class MainFragment @Inject constructor() : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getComponent(MainActivityComponent::class.java).inject(this)
+//        getComponent(MainActivityComponent::class.java).inject(this)
 
+        view.findViewById<Button>(R.id.btn_decrease).setOnClickListener {
+            presenter.decreaseSpeed(10)
+        }
 
-
-        val button = view.findViewById<Button>(R.id.btn_decrease)
-        button.setOnClickListener {
-            vehicle.decreaseSpeed(10)
+        view.findViewById<Button>(R.id.btn_decrease_of_app_instance).setOnClickListener {
+            vehicle.increaseSpeed(500)
             Toast.makeText(requireContext(), vehicle.speed.toString(), Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onSpeedChange(speed: Int) {
+        Toast.makeText(requireContext(), speed.toString(), Toast.LENGTH_LONG).show()
     }
 
 }

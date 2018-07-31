@@ -7,13 +7,10 @@ import com.ogoons.dagger2sample.R
 import com.ogoons.dagger2sample.component.ActivityComponent
 import javax.inject.Inject
 
-abstract class BaseActivity/*<P : BasePresenter>*/ : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var component: ActivityComponent
         protected set
-
-//    @Inject
-//    lateinit var presenter: P
 
     protected abstract fun getInitializedComponent(): ActivityComponent
 

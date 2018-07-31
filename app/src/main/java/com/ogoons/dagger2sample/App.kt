@@ -29,6 +29,7 @@ class App : Application() {
                 }
 
         vehicle.increaseSpeed(100)
-        Toast.makeText(this, "Initialize fathersVehicle speed : ${vehicle.speed} in app object", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Initialize vehicle speed : ${vehicle.speed} in app object", Toast.LENGTH_LONG).show()
     }
+
 }

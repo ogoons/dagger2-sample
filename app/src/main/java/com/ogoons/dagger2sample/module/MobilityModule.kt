@@ -2,6 +2,7 @@ package com.ogoons.dagger2sample.module
 
 import com.ogoons.dagger2sample.mobility.Motor
 import com.ogoons.dagger2sample.mobility.Vehicle
+import com.ogoons.dagger2sample.scope.ActivityScope
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,6 +18,6 @@ class MobilityModule {
      */
     @Singleton
     @Provides
-    fun provideVehicle() = Vehicle(provideMotor())
+    fun provideVehicle() = Vehicle(provideMotor()) // provide 하는 객체는 base 타입을 권장하지 않는다.
 
 }
