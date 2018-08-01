@@ -63,4 +63,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         (component as MainActivityComponent).inject(this)
     }
 
+
+
 }

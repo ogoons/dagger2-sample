@@ -1,6 +1,8 @@
 package com.ogoons.dagger2sample.module
 
 import android.app.Activity
+import android.content.Context
+import com.ogoons.dagger2sample.scope.ActivityScope
 import dagger.Module
 import dagger.Provides
 
@@ -10,9 +12,14 @@ import dagger.Provides
  * 그러면 Dagger 는 클래스 인스턴스를 만들 때 의존성을 만족시키기 위한 정보를 찾을 수 있습니다.
  */
 @Module
-class ActivityModule constructor(private val activity: Activity) {
+abstract class ActivityModule constructor(private val activity: Activity) {
 
     @Provides
+    @ActivityScope
     fun provideActivity(): Activity = activity
+
+    @Provides
+    @ActivityScope
+    fun provideActivityContext(): Context = activity.baseContext
 
 }
