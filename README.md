@@ -1,3 +1,5 @@
 # dagger2-sample
 
-for kotlin
+```
+Android + Dagger2 + Kotlin + MVP
+```
