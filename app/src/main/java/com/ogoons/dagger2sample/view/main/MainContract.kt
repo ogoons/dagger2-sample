@@ -1,11 +1,11 @@
-package com.ogoons.dagger2sample.view
+package com.ogoons.dagger2sample.view.main
 
 import com.ogoons.dagger2sample.view.base.BasePresenter
 import com.ogoons.dagger2sample.view.base.BaseView
 
 interface MainContract {
 
-    interface Presenter : BasePresenter {
+    interface Presenter : BasePresenter<View> {
 
         fun increaseSpeed(speed: Int)
 

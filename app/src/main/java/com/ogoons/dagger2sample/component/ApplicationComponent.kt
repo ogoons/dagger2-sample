@@ -3,6 +3,7 @@ package com.ogoons.dagger2sample.component
 import android.content.Context
 import com.ogoons.dagger2sample.App
 import com.ogoons.dagger2sample.module.ApplicationModule
+import com.ogoons.dagger2sample.module.MainActivityModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,5 +18,7 @@ interface ApplicationComponent {
 
     // member-injection method (멤버 파라미터로 의존성 주입을 시킬 객체를 넘김)
     fun inject(application: App)
+
+//    fun plus(mainActivityModule: MainActivityModule): MainActivityComponent
 
 }

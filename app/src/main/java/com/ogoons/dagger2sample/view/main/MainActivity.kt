@@ -1,24 +1,23 @@
-package com.ogoons.dagger2sample.view
+package com.ogoons.dagger2sample.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import com.ogoons.dagger2sample.R
-import com.ogoons.dagger2sample.component.ActivityComponent
+import com.ogoons.dagger2sample.component.ApplicationComponent
 import com.ogoons.dagger2sample.component.DaggerMainActivityComponent
 import com.ogoons.dagger2sample.component.MainActivityComponent
 import com.ogoons.dagger2sample.mobility.Vehicle
 import com.ogoons.dagger2sample.module.MainActivityModule
 import com.ogoons.dagger2sample.view.base.BaseActivity
+import com.ogoons.dagger2sample.view.main.sub.SubActivity
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity<MainContract.Presenter, MainContract.View, MainActivityComponent>(), MainContract.View {
 
     @Inject
     lateinit var fragment: MainFragment
-
-    @Inject
-    override lateinit var presenter: MainContract.Presenter
 
     @Inject
     lateinit var vehicle: Vehicle
@@ -27,18 +26,23 @@ class MainActivity : BaseActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button = findViewById<Button>(R.id.btn_increase_speed)
-        button.setOnClickListener {
+        findViewById<Button>(R.id.btn_increase_speed).setOnClickListener {
             // Call
 //            presenter.increaseSpeed(10)
+
             vehicle.increaseSpeed(10)
             Toast.makeText(this, vehicle.speed.toString(), Toast.LENGTH_LONG).show()
+        }
+
+        findViewById<Button>(R.id.btn_sub_activity).setOnClickListener {
+            startActivity(Intent(this, SubActivity::class.java))
         }
 
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_container, fragment, MainFragment::class.java.simpleName)
             commit()
         }
+
     }
 
     override fun onSpeedChange(speed: Int) {
@@ -49,20 +53,22 @@ class MainActivity : BaseActivity(), MainContract.View {
     /**
      * Build component
      */
-    override fun getInitializedComponent(): ActivityComponent {
-        return DaggerMainActivityComponent.builder()
-                .mainActivityModule(MainActivityModule(this))
-                .applicationComponent(getApplicationComponent())
+    override fun getInitializedComponent(): MainActivityComponent {
+                return DaggerMainActivityComponent.builder()
+                .mainActivityModule(MainActivityModule(this, this))
+//                .applicationComponent(getApplicationComponent())
                 .build()
     }
 
     /**
      * Injection
      */
-    override fun onInject(component: ActivityComponent) {
-        (component as MainActivityComponent).inject(this)
+    override fun onInject(component: MainActivityComponent) {
+        component.inject(this)
     }
 
-
+    override fun onInject(applicationComponent: ApplicationComponent) {
+//        applicationComponent.plus(MainActivityModule(this, this)).inject(this)
+    }
 
 }

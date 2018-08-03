@@ -1,10 +1,10 @@
-package com.ogoons.dagger2sample.view.main
+package com.ogoons.dagger2sample.view.main.sub
 
 import com.ogoons.dagger2sample.mobility.Motor
 import com.ogoons.dagger2sample.mobility.Vehicle
 import javax.inject.Inject
 
-class MainPresenter @Inject internal constructor(val view: MainContract.View) : MainContract.Presenter {
+class SubPresenter @Inject internal constructor(override val view: SubContract.View) : SubContract.Presenter {
 
     val vehicle: Vehicle by lazy {
         Vehicle(Motor())

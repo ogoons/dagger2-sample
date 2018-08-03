@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context=".view.MainFragment">
+    tools:context=".view.main.MainFragment">
 
     <Button
         android:id="@+id/btn_decrease"

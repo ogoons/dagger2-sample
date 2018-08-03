@@ -1,14 +1,14 @@
 package com.ogoons.dagger2sample.component
 
-import com.ogoons.dagger2sample.module.MainActivityModule
+import android.app.Activity
+import com.ogoons.dagger2sample.module.ActivityModule
 import com.ogoons.dagger2sample.scope.ActivityScope
-import com.ogoons.dagger2sample.view.MainActivity
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent(modules = arrayOf(MainActivityModule::class))
-interface MainActivityComponent {
+@Subcomponent(modules = arrayOf(ActivityModule::class))
+interface ActivityComponent {
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(activity: Activity)
 
 }
