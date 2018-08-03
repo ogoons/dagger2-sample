@@ -1,10 +1,14 @@
 package com.ogoons.dagger2sample.component
 
-import com.ogoons.dagger2sample.module.ActivityModule
-import dagger.Component
+import com.ogoons.dagger2sample.module.MainActivityModule
+import com.ogoons.dagger2sample.scope.ActivityScope
+import com.ogoons.dagger2sample.view.MainActivity
+import dagger.Subcomponent
 
-@Component(
-        modules = arrayOf(ActivityModule::class)
-)
-interface ActivityComponent { // component가 constructor를 가지고 있지 않다면 create() 사용 가능
+@ActivityScope
+@Subcomponent(modules = arrayOf(MainActivityModule::class))
+interface MainActivityComponent {
+
+    fun inject(mainActivity: MainActivity)
+
 }
